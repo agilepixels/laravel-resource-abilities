@@ -3,8 +3,8 @@
 namespace AgilePixels\ResourceAbilities\Resources;
 
 use AgilePixels\ResourceAbilities\AbilityResource;
-use Illuminate\Database\Eloquent\Model;
 use AgilePixels\ResourceAbilities\Models\HasAbilities as ModelHasAbilities;
+use Illuminate\Database\Eloquent\Model;
 
 /**
  * @property-read Model|ModelHasAbilities $resource
