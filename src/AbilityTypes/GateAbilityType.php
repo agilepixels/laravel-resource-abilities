@@ -1,0 +1,37 @@
+<?php
+
+namespace AgilePixels\ResourceAbilities\AbilityTypes;
+
+use AgilePixels\ResourceAbilities\AbilityContainer;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Gate;
+use JetBrains\PhpStorm\Pure;
+
+class GateAbilityType extends AbilityType
+{
+    #[Pure]
+    public function __construct(protected string $ability, Model $model)
+    {
+        parent::__construct($model);
+    }
+
+    #[Pure]
+    public static function make(string $ability, Model $model): GateAbilityType
+    {
+        return new self($ability, $model);
+    }
+
+    public function getAbilities(array $abilities): array
+    {
+        if (! in_array($this->ability, $abilities)) {
+            return [];
+        }
+
+        $abilityContainer = AbilityContainer::make(
+            $this->ability,
+            Gate::check($this->ability, [$this->model, ...$this->parameters]),
+        );
+
+        return $this->resolveSerializer()->format($abilityContainer);
+    }
+}
