@@ -8,10 +8,6 @@ route. Therefore, this package gives you precise control over which gates exactl
 look at such a resource:
 
 ```php
-use AgilePixels\ResourceAbilities\ProcessesAbilities;
-use App\Policies\PostPolicy;
-use Illuminate\Http\Resources\Json\JsonResource;
-
 class PostResource extends JsonResource
 {
     use ProcessesAbilities;
@@ -35,17 +31,17 @@ certain permission. As a result, the json output will look like this:
 
 ```json
 {
-  "data": {
+    "data": {
     "id": 10,
     "title": "Corporis eum adipisci et cum nostrum.",
     "slug": "corporis-eum-adipisci-et-cum-nostrum",
     "published_at": "2020-06-06T10:49:01.000000Z",
-    "abilities": {
-      "view": true,
-      "update": false,
-      "delete": true
+        "abilities": {
+            "view": true,
+            "update": false,
+            "delete": true
+        }
     }
-  }
 }
 ```
 
