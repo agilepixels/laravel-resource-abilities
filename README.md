@@ -294,6 +294,50 @@ public function toArray($request): array
 }
 ```
 
+### Json structure
+
+If you want to change how the abilities are structured, you can use serializers to output the abilities in different 
+formats or write your own serializers. By default, the `AbilitySerializer` is used which outputs the abilities in the 
+format: `ability => granted`.
+
+```json
+"abilities": {
+    "view": true,
+    "update": true,
+    "delete": false
+}
+```
+
+#### Use other serializers
+
+The serializer that will be used can be changed in two ways. Either by changing the `resource-abilities.serializer` 
+config or by passing the serializer class as third (`serializer:` when using named parameters) parameter to the 
+`abilities()` method. We also provide the `ExtendedAbilitySerializer` which outputs in the following format:
+
+```json
+"abilities": {
+    "view": {
+        "ability": "view",
+        "granted": true,
+    },
+    "update": {
+        "ability": "update",
+        "granted": true,
+    },
+    "delete": {
+        "ability": "delete",
+        "granted": false,
+    },
+}
+```
+
+#### Custom serializers
+
+You're free to provide and use your own serializer. You can do so by implementing the 
+`AgilePixels\ResourceAbilities\Serializers\Serializer` interface and add it to the config file or the `abilities()`
+method.
+
+
 ## Testing
 
 ``` bash
