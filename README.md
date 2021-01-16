@@ -159,7 +159,8 @@ public function toArray($request): array
 
 #### Adding multiple gates/policies
 
-It may be the case that you want to add a policy but also some other gates. 
+It may be the case that you want to add a policy but also some other gates. Or perhaps even multiple policies for one 
+model. This may be achieved by passing a closure to the `abilities()` method.
 
 [comment]: <> (TODO Closure)
 
@@ -206,7 +207,7 @@ following example:
 
 [comment]: <> (TODO add multiple abilities in one call)
 
-#### Loading abilities one builder level
+#### Loading abilities on builder level
 
 But what if you're getting a whole collection of models. Performance wise it is inefficient to run across the entire 
 collection and add the right abilities everywhere using a map. That is why it is also possible to add the abilities at 
@@ -262,6 +263,34 @@ The json response from your controller will now check the `view` gate for the au
         },
         // More posts with authors
     ]
+}
+```
+
+### Supplying additional context
+
+When authorizing actions using policies, you may pass a parameters array as the second argument to the `abilities()` 
+method. These parameters will be added when checking the ability on response. 
+
+```php
+class PostPolicy
+{
+    use HandlesAuthorization;
+    
+    public function restore(User $user, Post $post, bool $parameter): bool
+    {
+        // Use $parameter to determine result
+    }
+}
+```
+
+```php
+public function toArray($request): array
+{
+    return [
+        'abilities' => $this->abilities(PostPolicy::class, [
+            true
+        ]),
+    ];
 }
 ```
 
