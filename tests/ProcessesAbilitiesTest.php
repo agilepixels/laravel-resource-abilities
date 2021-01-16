@@ -1,18 +1,17 @@
 <?php
 
-namespace AgilePixels\ResourceAbilities\Tests\Resources;
+namespace AgilePixels\ResourceAbilities\Tests;
 
-use AgilePixels\ResourceAbilities\Resources\HasAbilities;
+use AgilePixels\ResourceAbilities\ProcessesAbilities;
 use AgilePixels\ResourceAbilities\Serializers\ExtendedAbilitySerializer;
 use AgilePixels\ResourceAbilities\Tests\Fakes\TestModel;
 use AgilePixels\ResourceAbilities\Tests\Fakes\TestPolicy;
 use AgilePixels\ResourceAbilities\Tests\Fakes\User;
-use AgilePixels\ResourceAbilities\Tests\TestCase;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 
-class HasAbilitiesTest extends TestCase
+class ProcessesAbilitiesTest extends TestCase
 {
     private TestModel $testModel;
 
@@ -40,7 +39,7 @@ class HasAbilitiesTest extends TestCase
     public function it_will_generate_abilities_when_making_a_resource()
     {
         $testResource = new class(null) extends JsonResource {
-            use HasAbilities;
+            use ProcessesAbilities;
 
             public function toArray($request)
             {
@@ -63,7 +62,7 @@ class HasAbilitiesTest extends TestCase
     public function it_will_load_abilities()
     {
         $testResource = new class(null) extends JsonResource {
-            use HasAbilities;
+            use ProcessesAbilities;
 
             public function toArray($request)
             {
@@ -93,7 +92,7 @@ class HasAbilitiesTest extends TestCase
     public function it_will_pass_parameters()
     {
         $testResource = new class(null) extends JsonResource {
-            use HasAbilities;
+            use ProcessesAbilities;
 
             public function toArray($request)
             {
@@ -121,7 +120,7 @@ class HasAbilitiesTest extends TestCase
     public function it_will_use_serializer()
     {
         $testResource = new class(null) extends JsonResource {
-            use HasAbilities;
+            use ProcessesAbilities;
 
             public function toArray($request)
             {

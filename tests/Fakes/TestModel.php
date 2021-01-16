@@ -2,7 +2,7 @@
 
 namespace AgilePixels\ResourceAbilities\Tests\Fakes;
 
-use AgilePixels\ResourceAbilities\Models\HasAbilities;
+use AgilePixels\ResourceAbilities\HasAbilities;
 use Illuminate\Database\Eloquent\Model;
 
 class TestModel extends Model

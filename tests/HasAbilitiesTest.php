@@ -1,9 +1,8 @@
 <?php
 
-namespace AgilePixels\ResourceAbilities\Tests\Models;
+namespace AgilePixels\ResourceAbilities\Tests;
 
 use AgilePixels\ResourceAbilities\Tests\Fakes\TestModel;
-use AgilePixels\ResourceAbilities\Tests\TestCase;
 
 class HasAbilitiesTest extends TestCase
 {
@@ -31,5 +30,15 @@ class HasAbilitiesTest extends TestCase
         $this->testModel->addAbility('ability');
 
         $this->assertContains('ability', $this->testModel->getAbilities());
+    }
+
+    /** @test */
+    public function it_merges_abilities_to_new_instances()
+    {
+        $this->testModel->addAbility('ability');
+
+        $newInstance = $this->testModel->newInstance();
+
+        $this->assertContains('ability', $newInstance->getAbilities());
     }
 }

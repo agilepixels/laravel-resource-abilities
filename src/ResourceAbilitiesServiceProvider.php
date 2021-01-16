@@ -2,6 +2,7 @@
 
 namespace AgilePixels\ResourceAbilities;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\ServiceProvider;
 
 class ResourceAbilitiesServiceProvider extends ServiceProvider
@@ -18,5 +19,11 @@ class ResourceAbilitiesServiceProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(__DIR__ . '/../config/resource-abilities.php', 'resource-abilities');
+
+        Builder::macro('addAbility', function (string $ability) {
+            $this->model->addAbility($ability);
+
+            return $this;
+        });
     }
 }
