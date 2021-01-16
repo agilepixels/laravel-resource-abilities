@@ -337,6 +337,62 @@ You're free to provide and use your own serializer. You can do so by implementin
 `AgilePixels\ResourceAbilities\Serializers\Serializer` interface and add it to the config file or the `abilities()`
 method.
 
+## WhenLoaded helpers
+
+This package also provides another little trait that might be helpful. Add the 
+`AgilePixels\ResourceAbilities\HasRelationships` trait to your API resources to make use of the `makeWhenLoaded()` 
+and `collectionWhenLoaded()` methods. These methods merge a relationship into your API resource when the given 
+relationship is loaded on the model. This may be helpful since you can define all relationships in your API resource 
+and manage the relationships should be loaded from the controller. Let us show you some example resource:
+
+```php
+use AgilePixels\ResourceAbilities\HasRelationships;
+use AgilePixels\ResourceAbilities\ProcessesAbilities;
+
+class PostResource extends JsonResource
+{
+    use ProcessesAbilities, HasRelationships;
+
+    public function toArray($request): array
+    {
+        return [
+            'id' => $this->id,
+            'title' => $this->title,
+            'slug' => $this->slug,
+            'published_at' => $this->published_at,
+
+            'author' => UserResource::makeWhenLoaded('author', $this),
+
+            'abilities' => $this->abilities(PostPolicy::class)
+        ];
+    }
+}
+```
+
+```php
+use AgilePixels\ResourceAbilities\HasRelationships;
+use AgilePixels\ResourceAbilities\ProcessesAbilities;
+
+class UserResource extends JsonResource
+{
+    use ProcessesAbilities, HasRelationships;
+    
+    public function toArray($request): array
+    {
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+    
+            'posts' => PostResource::collectionWhenLoaded('posts', $this),
+    
+            'abilities' => $this->abilities(UserPolicy::class)
+        ];
+    }
+}
+```
+
+Now, when returning a list of posts, the author won't be added to the `PostResource`. However, when you load the author 
+for the post models, the `UserResource` will automatically be added to your post model.
 
 ## Testing
 
