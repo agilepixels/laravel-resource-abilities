@@ -33,4 +33,9 @@ trait HasAbilities
 
         return $model;
     }
+
+    public function newCollection(array $models = [])
+    {
+        return new Collection($models);
+    }
 }

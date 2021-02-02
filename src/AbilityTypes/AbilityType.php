@@ -12,7 +12,7 @@ abstract class AbilityType
 
     protected ?string $serializer = null;
 
-    public function __construct(protected Model $model) {}
+    public function __construct(protected Model|string $model) {}
 
     /**
      * Parameters that are passed to the policy method which can be used for additional

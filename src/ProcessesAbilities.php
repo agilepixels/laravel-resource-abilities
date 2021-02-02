@@ -10,16 +10,15 @@ use Illuminate\Database\Eloquent\Model;
  */
 trait ProcessesAbilities
 {
-    /**
-     * @param string $ability
-     * @param array $parameters
-     * @param string|null $serializer
-     *
-     * @return AbilityResource
-     */
     public function abilities(string $ability, array $parameters = [], string $serializer = null): AbilityResource
     {
         return AbilityResource::create($this->resource, $this->resource->getAbilities())
+            ->ability($ability, $parameters, $serializer);
+    }
+
+    public static function collectionAbilities(string $ability, string $model, array $abilities, array $parameters = [], string $serializer = null): AbilityResource
+    {
+        return AbilityResource::create($model, $abilities)
             ->ability($ability, $parameters, $serializer);
     }
 }

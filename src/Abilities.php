@@ -25,7 +25,7 @@ class Abilities
         return $gateAbilityType;
     }
 
-    public function policy(string $policy, Model $model): PolicyAbilityType
+    public function policy(string $policy, Model|string $model): PolicyAbilityType
     {
         $policyAbilityType = PolicyAbilityType::make($policy, $model);
 
