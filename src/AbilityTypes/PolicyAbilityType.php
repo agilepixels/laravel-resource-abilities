@@ -12,7 +12,7 @@ class PolicyAbilityType extends AbilityType
     protected array $abilities = [];
 
     #[Pure]
-    public function __construct(string $policy, Model|string $model)
+    public function __construct(string $policy, Model | string $model)
     {
         parent::__construct($model);
 
@@ -20,7 +20,7 @@ class PolicyAbilityType extends AbilityType
     }
 
     #[Pure]
-    public static function make(string $policy, Model|string $model): static
+    public static function make(string $policy, Model | string $model): static
     {
         return new static($policy, $model);
     }
