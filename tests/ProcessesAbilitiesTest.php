@@ -7,6 +7,7 @@ use AgilePixels\ResourceAbilities\Serializers\ExtendedAbilitySerializer;
 use AgilePixels\ResourceAbilities\Tests\Fakes\TestModel;
 use AgilePixels\ResourceAbilities\Tests\Fakes\TestPolicy;
 use AgilePixels\ResourceAbilities\Tests\Fakes\User;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
@@ -143,6 +144,78 @@ class ProcessesAbilitiesTest extends TestCase
                         'granted' => true,
                     ],
                 ],
+            ],
+        ]);
+    }
+
+    /** @test */
+    public function it_will_generate_abilities_when_making_a_collection()
+    {
+        $testResource = new class(null) extends JsonResource {
+            use ProcessesAbilities;
+
+            public function toArray($request)
+            {
+                return [];
+            }
+
+            public static function collection($resource): AnonymousResourceCollection
+            {
+                $collection = parent::collection($resource);
+
+                $collection->additional([
+                    'abilities' => self::collectionAbilities(TestPolicy::class, TestModel::class, $resource->getAbilities()),
+                ]);
+
+                return $collection;
+            }
+        };
+
+        $collection = TestModel::query()->get();
+
+        $this->router->get('/resources', fn () => $testResource::collection($collection));
+
+        $this->get('/resources')->assertExactJson([
+            'data' => [[]],
+            'abilities' => [],
+        ]);
+    }
+
+    /** @test */
+    public function it_will_load_collection_abilities()
+    {
+        $testResource = new class(null) extends JsonResource {
+            use ProcessesAbilities;
+
+            public function toArray($request)
+            {
+                return [];
+            }
+
+            public static function collection($resource): AnonymousResourceCollection
+            {
+                $collection = parent::collection($resource);
+
+                $collection->additional([
+                    'abilities' => self::collectionAbilities(TestPolicy::class, TestModel::class, $resource->getAbilities()),
+                ]);
+
+                return $collection;
+            }
+        };
+
+        $collection = TestModel::query()->get();
+        $collection
+            ->addAbility('viewAny')
+            ->addAbility('create');
+
+        $this->router->get('/resources', fn () => $testResource::collection($collection));
+
+        $this->get('/resources')->assertExactJson([
+            'data' => [[]],
+            'abilities' => [
+                'viewAny' => true,
+                'create' => false,
             ],
         ]);
     }

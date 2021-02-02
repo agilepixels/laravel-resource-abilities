@@ -28,7 +28,7 @@ class TestPolicy
 
     public function create(User $user): bool
     {
-        return true;
+        return false;
     }
 
     public function update(User $user, TestModel $test): bool
