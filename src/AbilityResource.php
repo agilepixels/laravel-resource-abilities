@@ -12,14 +12,14 @@ class AbilityResource extends JsonResource
     /** The abilities that are available in the resource */
     protected Abilities $abilitiesGroup;
 
-    public function __construct(Model|string $model, protected array $abilities = [])
+    public function __construct(Model | string $model, protected array $abilities = [])
     {
         parent::__construct($model);
 
         $this->abilitiesGroup = new Abilities();
     }
 
-    public static function create(Model|string $model, array $abilities = []): static
+    public static function create(Model | string $model, array $abilities = []): static
     {
         return new static($model, $abilities);
     }

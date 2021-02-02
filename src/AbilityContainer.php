@@ -6,7 +6,9 @@ use JetBrains\PhpStorm\Pure;
 
 class AbilityContainer
 {
-    public function __construct(public string $ability, public bool $granted) {}
+    public function __construct(public string $ability, public bool $granted)
+    {
+    }
 
     #[Pure]
     public static function make(string $ability, bool $granted): AbilityContainer
