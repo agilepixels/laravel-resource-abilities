@@ -2,6 +2,9 @@
 
 namespace AgilePixels\ResourceAbilities;
 
+/**
+ * @method static Builder query()
+ */
 trait HasAbilities
 {
     use AddsAbilities;
