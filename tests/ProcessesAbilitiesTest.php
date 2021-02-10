@@ -161,10 +161,9 @@ class ProcessesAbilitiesTest extends TestCase
 
             public static function collection($resource): AnonymousResourceCollection
             {
-                return parent::collection($resource)
-                    ->additional([
-                        'abilities' => self::collectionAbilities(TestPolicy::class, TestModel::class, $resource->getAbilities()),
-                    ]);
+                return parent::collection($resource)->additional([
+                    'abilities' => self::collectionAbilities($resource, TestPolicy::class, TestModel::class),
+                ]);
             }
         };
 
@@ -191,10 +190,9 @@ class ProcessesAbilitiesTest extends TestCase
 
             public static function collection($resource): AnonymousResourceCollection
             {
-                return parent::collection($resource)
-                    ->additional([
-                        'abilities' => self::collectionAbilities(TestPolicy::class, TestModel::class, $resource->getAbilities()),
-                    ]);
+                return parent::collection($resource)->additional([
+                    'abilities' => self::collectionAbilities($resource, TestPolicy::class, TestModel::class),
+                ]);
             }
         };
 
