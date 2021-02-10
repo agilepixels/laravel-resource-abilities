@@ -11,7 +11,7 @@ trait AddsAbilities
         return $this->abilities;
     }
 
-    public function addAbility(string|array $ability): self
+    public function addAbility(string | array $ability): self
     {
         $this->mergeAbilities(is_string($ability) ? func_get_args() : $ability);
 

@@ -4,15 +4,11 @@ namespace AgilePixels\ResourceAbilities\Tests;
 
 use AgilePixels\ResourceAbilities\HasRelationships;
 use AgilePixels\ResourceAbilities\ProcessesAbilities;
-use AgilePixels\ResourceAbilities\Serializers\ExtendedAbilitySerializer;
 use AgilePixels\ResourceAbilities\Tests\Fakes\TestModel;
-use AgilePixels\ResourceAbilities\Tests\Fakes\TestPolicy;
 use AgilePixels\ResourceAbilities\Tests\Fakes\User;
 use AgilePixels\ResourceAbilities\Tests\Fakes\UserResource;
-use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Gate;
 
 class HasRelationshipsTest extends TestCase
 {
@@ -130,7 +126,7 @@ class HasRelationshipsTest extends TestCase
                     [
                         'id' => 1,
                         'name' => 'Test User',
-                    ]
+                    ],
                 ],
             ],
         ]);
