@@ -90,7 +90,35 @@ class ProcessesAbilitiesTest extends TestCase
     }
 
     /** @test */
-    public function it_will_pass_parameters()
+    public function it_will_pass_parameters_when_checking_gates()
+    {
+        $testResource = new class(null) extends JsonResource {
+            use ProcessesAbilities;
+
+            public function toArray($request)
+            {
+                return [
+                    'abilities' => $this->abilities('restore', [true]),
+                ];
+            }
+        };
+
+        $this->testModel
+            ->addAbility('restore');
+
+        $this->router->get('/resource', fn () => $testResource::make($this->testModel));
+
+        $this->get('/resource')->assertExactJson([
+            'data' => [
+                'abilities' => [
+                    'restore' => true,
+                ],
+            ],
+        ]);
+    }
+
+    /** @test */
+    public function it_will_pass_parameters_when_checking_policies()
     {
         $testResource = new class(null) extends JsonResource {
             use ProcessesAbilities;

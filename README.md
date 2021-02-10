@@ -258,7 +258,7 @@ The json response from your controller will now check the `view` gate for the au
                 }
             },
             "abilities": {
-                update": true
+                "update": true
             }
         },
         // More posts with authors
@@ -268,7 +268,7 @@ The json response from your controller will now check the `view` gate for the au
 
 ### Supplying additional context
 
-When authorizing actions using policies, you may pass a parameters array as the second argument to the `abilities()` 
+When authorizing actions, you may pass a parameters array as the second argument to the `abilities()` 
 method. These parameters will be added when checking the ability on response. 
 
 ```php
@@ -288,6 +288,15 @@ public function toArray($request): array
 {
     return [
         'abilities' => $this->abilities(PostPolicy::class, [
+            true
+        ]),
+    ];
+}
+
+public function toArray($request): array
+{
+    return [
+        'abilities' => $this->abilities('restore', [
             true
         ]),
     ];
