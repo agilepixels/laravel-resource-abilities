@@ -5,7 +5,7 @@ namespace AgilePixels\ResourceAbilities\Tests;
 use AgilePixels\ResourceAbilities\AddsAbilitiesTest;
 use AgilePixels\ResourceAbilities\Tests\Fakes\TestModel;
 
-class HasAbilitiesTest extends TestCase
+class CollectionTest extends TestCase
 {
     use AddsAbilitiesTest;
 
