@@ -2,8 +2,8 @@
 
 If you build a web application with a separate frontend and backend, all kinds of information has to be transferred between
 these two parts. Part of this are your routes, but how do you share the authorized actions in the most convenient way?
-One quick note: from now on, we'll call these authorized actions "abilities". To share abilities, we use API resources.  
-That way we can see the abilities the current user has for that resource.
+One quick note: from now on, we'll call these authorized actions "abilities". To share abilities, we use API resources. That 
+way we can see the abilities the current user has for that resource.
 
 Please read the full introduction and all documentation about this package in our [GitHub Wiki](https://github.com/agilepixels/laravel-resource-abilities/wiki).
 
