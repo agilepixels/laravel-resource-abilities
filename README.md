@@ -5,7 +5,7 @@ these two parts. Part of this are your routes, but how do you share the authoriz
 One quick note: from now on, we'll call these authorized actions "abilities". To share abilities, we use API resources.  
 That way we can see the abilities the current user has for that resource.
 
-Please read the full introduction and all documentation about this package in our [GitHub Wiki](/wiki).
+Please read the full introduction and all documentation about this package in our [GitHub Wiki](https://github.com/agilepixels/laravel-resource-abilities/wiki).
 
 ## Support us
 
