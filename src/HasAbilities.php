@@ -13,12 +13,12 @@ trait HasAbilities
     {
         $model = parent::newInstance($attributes, $exists);
 
-        $model->mergeAbilities($this->abilities);
+        $model->mergeAbilities($this->abilities, $this->withAllAbilities);
 
         return $model;
     }
 
-    public function newCollection(array $models = [])
+    public function newCollection(array $models = []): Collection
     {
         return new Collection($models);
     }

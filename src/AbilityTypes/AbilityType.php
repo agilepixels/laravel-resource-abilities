@@ -58,9 +58,10 @@ abstract class AbilityType
     }
 
     /**
+     * @param bool $withAllAbilities
      * @param array $abilities An array of abilities that should be loaded for the resource
      *
      * @return array
      */
-    abstract public function getAbilities(array $abilities): array;
+    abstract public function getAbilities(array $abilities, bool $withAllAbilities): array;
 }

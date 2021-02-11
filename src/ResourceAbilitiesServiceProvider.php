@@ -25,5 +25,11 @@ class ResourceAbilitiesServiceProvider extends ServiceProvider
 
             return $this;
         });
+
+        Builder::macro('withAllAbilities', function (bool $withAllAbilities = true) {
+            $this->model->withAllAbilities($withAllAbilities);
+
+            return $this;
+        });
     }
 }

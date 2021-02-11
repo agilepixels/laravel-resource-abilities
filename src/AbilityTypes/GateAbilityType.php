@@ -21,9 +21,9 @@ class GateAbilityType extends AbilityType
         return new self($ability, $model);
     }
 
-    public function getAbilities(array $abilities): array
+    public function getAbilities(array $abilities, bool $withAllAbilities): array
     {
-        if (! in_array($this->ability, $abilities)) {
+        if (! in_array($this->ability, $abilities) && !$withAllAbilities) {
             return [];
         }
 

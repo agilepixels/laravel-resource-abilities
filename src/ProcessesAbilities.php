@@ -13,15 +13,19 @@ trait ProcessesAbilities
 {
     public function abilities(string $ability, array $parameters = [], string $serializer = null): AbilityResource
     {
-        return AbilityResource::create($this->resource, $this->resource->getAbilities())
-            ->ability($ability, $parameters, $serializer);
+        return AbilityResource::create(
+            $this->resource,
+            $this->resource->getAbilities(),
+            $this->resource->getWithAllAbilities()
+        )->ability($ability, $parameters, $serializer);
     }
 
     public static function collectionAbilities(Collection | MissingValue $resource, string $ability, string $model, array $parameters = [], string $serializer = null): AbilityResource
     {
         return AbilityResource::create(
             $model,
-            $resource instanceof Collection ? $resource->getAbilities() : []
+            $resource instanceof Collection ? $resource->getAbilities() : [],
+            $resource instanceof Collection ? $resource->getWithAllAbilities() : true,
         )->ability($ability, $parameters, $serializer);
     }
 }

@@ -12,16 +12,22 @@ class AbilityResource extends JsonResource
     /** The abilities that are available in the resource */
     protected Abilities $abilitiesGroup;
 
-    public function __construct(Model | string $model, protected array $abilities = [])
+    protected array $abilities;
+
+    protected bool $withAllAbilities;
+
+    public function __construct(Model | string $model, array $abilities, bool $withAllAbilities)
     {
         parent::__construct($model);
 
         $this->abilitiesGroup = new Abilities();
+        $this->abilities = $abilities;
+        $this->withAllAbilities = $withAllAbilities;
     }
 
-    public static function create(Model | string $model, array $abilities = []): static
+    public static function create(Model | string $model, array $abilities, bool $withAllAbilities): static
     {
-        return new static($model, $abilities);
+        return new static($model, $abilities, $withAllAbilities);
     }
 
     public function ability(string $ability, array $parameters = [], string $serializer = null): AbilityResource
@@ -54,7 +60,7 @@ class AbilityResource extends JsonResource
         return $this->abilitiesGroup
             ->getAbilityTypes()
             ->mapWithKeys(function (AbilityType $abilityType) {
-                return $abilityType->getAbilities($this->abilities);
+                return $abilityType->getAbilities($this->abilities, $this->withAllAbilities);
             })
             ->toArray();
     }
