@@ -106,18 +106,6 @@ use AgilePixels\ResourceAbilities\ProcessesAbilities;
 class PostResource extends JsonResource
 {
     use ProcessesAbilities;
-
-    public function toArray($request): array
-    {
-        return [
-            'id' => $this->id,
-            'title' => $this->title,
-            'slug' => $this->slug,
-            'published_at' => $this->published_at,
-            
-            'abilities' => $this->abilities(PostPolicy::class)
-        ];
-    }
 }
 ```
 
@@ -161,6 +149,49 @@ public function toArray($request): array
 
 It may be the case that you want to add a policy but also some other gates. Or perhaps even multiple policies for one 
 model. This may be achieved by passing a closure to the `abilities()` method.
+
+[comment]: <> (TODO Closure)
+
+### Collections
+
+#### Using a policy
+
+Some action checks are model specific. For instance, the actions `view`, `update` or `delete` require a specific model to 
+determine whether the user is granted that permission or not. However, some actions don't need a model, such as 
+`viewAny` or `create`. In the Laravel docs, these are referred to as[methods without models](https://laravel.com/docs/master/authorization#methods-without-models).
+You might need these permissions when a collection is empty. That's why it doesn't make sense to include these 
+permissions on model level, but instead add them to the collection meta. 
+
+```php 
+public static function collection($resource): AnonymousResourceCollection
+{
+    return parent::collection($resource)->additional([
+        'abilities' => self::collectionAbilities($resource, PostPolicy::class, Post::class)
+    ]);
+}
+```
+
+That's why you can use the `collectionAbilities()` method when creating a resource collection. This requires the 
+model class to perform the gate check, just as you would provide it when checking methods without model in your policy.
+
+#### Using a gate
+
+The most used way to add abilities will probably be using a policy as described above. However, you can also check a 
+single action for the given model class using a gate check. 
+
+```php 
+public static function collection($resource): AnonymousResourceCollection
+{
+    return parent::collection($resource)->additional([
+        'abilities' => self::collectionAbilities($resource, 'viewAny', Post::class)
+    ]);
+}
+```
+
+#### Adding multiple gates/policies
+
+Like [adding multiple abilities](#adding-multiple-gatespolicies) for a model, it may also be the case that you want the
+same behaviour on collection level. This may be achieved by passing a closure to the `collectionAbilities()` method.
 
 [comment]: <> (TODO Closure)
 
