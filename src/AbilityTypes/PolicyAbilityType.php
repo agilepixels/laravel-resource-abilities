@@ -37,15 +37,20 @@ class PolicyAbilityType extends AbilityType
             /**
              * Filter out the non-specified abilities
              */
-            ->when(!$withAllAbilities, fn (Collection $collection) =>
+            ->when(
+                ! $withAllAbilities,
+                fn (Collection $collection) =>
                 $collection->filter(fn (string $ability) => in_array($ability, $abilities))
             )
 
             /**
              * Filter out the methods that require a model if no model is available
              */
-            ->when(!$this->model instanceof Model, fn (Collection $collection) =>
-                $collection->filter(fn (string $ability) => count($parameters = (new ReflectionMethod($this->policy, $ability))->getParameters()) > 1
+            ->when(
+                ! $this->model instanceof Model,
+                fn (Collection $collection) =>
+                $collection->filter(
+                    fn (string $ability) => count($parameters = (new ReflectionMethod($this->policy, $ability))->getParameters()) > 1
                     ? $parameters[1]->getType()?->getName() !== $this->model
                     : true
                 )
