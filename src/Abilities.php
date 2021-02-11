@@ -16,7 +16,7 @@ class Abilities
         $this->abilityTypes = new Collection();
     }
 
-    public function gate(string $ability, Model $model): GateAbilityType
+    public function gate(string $ability, Model | string $model): GateAbilityType
     {
         $gateAbilityType = GateAbilityType::make($ability, $model);
 

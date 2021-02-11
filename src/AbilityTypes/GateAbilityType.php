@@ -10,13 +10,13 @@ use JetBrains\PhpStorm\Pure;
 class GateAbilityType extends AbilityType
 {
     #[Pure]
-    public function __construct(protected string $ability, Model $model)
+    public function __construct(protected string $ability, Model | string $model)
     {
         parent::__construct($model);
     }
 
     #[Pure]
-    public static function make(string $ability, Model $model): GateAbilityType
+    public static function make(string $ability, Model | string $model): GateAbilityType
     {
         return new self($ability, $model);
     }

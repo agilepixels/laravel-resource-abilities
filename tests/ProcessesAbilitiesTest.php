@@ -206,7 +206,7 @@ class ProcessesAbilitiesTest extends TestCase
     }
 
     /** @test */
-    public function it_will_load_collection_abilities()
+    public function it_will_load_collection_policy_abilities()
     {
         $testResource = new class(null) extends JsonResource {
             use ProcessesAbilities;
@@ -236,6 +236,40 @@ class ProcessesAbilitiesTest extends TestCase
             'abilities' => [
                 'viewAny' => true,
                 'create' => false,
+            ],
+        ]);
+    }
+
+    /** @test */
+    public function it_will_load_collection_gate_abilities()
+    {
+        $testResource = new class(null) extends JsonResource {
+            use ProcessesAbilities;
+
+            public function toArray($request)
+            {
+                return [];
+            }
+
+            public static function collection($resource): AnonymousResourceCollection
+            {
+                return parent::collection($resource)->additional([
+                    'abilities' => self::collectionAbilities($resource, 'viewAny', TestModel::class),
+                ]);
+            }
+        };
+
+        $collection = TestModel::query()->get();
+        $collection
+            ->addAbility('viewAny')
+            ->addAbility('create');
+
+        $this->router->get('/resources', fn () => $testResource::collection($collection));
+
+        $this->get('/resources')->assertExactJson([
+            'data' => [[]],
+            'abilities' => [
+                'viewAny' => true,
             ],
         ]);
     }
