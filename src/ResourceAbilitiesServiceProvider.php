@@ -20,8 +20,8 @@ class ResourceAbilitiesServiceProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(__DIR__ . '/../config/resource-abilities.php', 'resource-abilities');
 
-        Builder::macro('addAbility', function (string $ability) {
-            $this->model->addAbility($ability);
+        Builder::macro('checkAbility', function (string $ability) {
+            $this->model->checkAbility($ability);
 
             return $this;
         });

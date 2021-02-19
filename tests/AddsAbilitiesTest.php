@@ -13,7 +13,7 @@ trait AddsAbilitiesTest
     /** @test */
     public function it_adds_abilities()
     {
-        $this->testModel->addAbility('ability');
+        $this->testModel->checkAbility('ability');
 
         $this->assertContains('ability', $this->testModel->getAbilities());
     }
@@ -21,7 +21,7 @@ trait AddsAbilitiesTest
     /** @test */
     public function it_merges_abilities_to_new_instances()
     {
-        $this->testModel->addAbility('ability');
+        $this->testModel->checkAbility('ability');
 
         $newInstance = $this->testModel->newInstance();
 
@@ -31,7 +31,7 @@ trait AddsAbilitiesTest
     /** @test */
     public function it_adds_an_array_of_abilities()
     {
-        $this->testModel->addAbility(['ability', 'another_ability']);
+        $this->testModel->checkAbility(['ability', 'another_ability']);
 
         $this->assertContains('ability', $this->testModel->getAbilities());
         $this->assertContains('another_ability', $this->testModel->getAbilities());
@@ -40,7 +40,7 @@ trait AddsAbilitiesTest
     /** @test */
     public function it_adds_spreaded_abilities()
     {
-        $this->testModel->addAbility('ability', 'another_ability');
+        $this->testModel->checkAbility('ability', 'another_ability');
 
         $this->assertContains('ability', $this->testModel->getAbilities());
         $this->assertContains('another_ability', $this->testModel->getAbilities());

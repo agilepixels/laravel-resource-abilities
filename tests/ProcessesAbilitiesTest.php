@@ -78,8 +78,8 @@ class ProcessesAbilitiesTest extends TestCase
         };
 
         $this->testModel
-            ->addAbility('view')
-            ->addAbility('update');
+            ->checkAbility('view')
+            ->checkAbility('update');
 
         $this->router->get('/resource', fn () => $testResource::make($this->testModel));
 
@@ -108,8 +108,8 @@ class ProcessesAbilitiesTest extends TestCase
         };
 
         $this->testModel
-            ->addAbility('view')
-            ->addAbility('update');
+            ->checkAbility('view')
+            ->checkAbility('update');
 
         $this->router->get('/resource', fn () => $testResource::make($this->testModel));
 
@@ -139,8 +139,8 @@ class ProcessesAbilitiesTest extends TestCase
         };
 
         $this->testModel
-            ->addAbility('view')
-            ->addAbility('update');
+            ->checkAbility('view')
+            ->checkAbility('update');
 
         $this->router->get('/resource', fn () => $testResource::make($this->testModel));
 
@@ -200,7 +200,7 @@ class ProcessesAbilitiesTest extends TestCase
         };
 
         $this->testModel
-            ->addAbility('restore');
+            ->checkAbility('restore');
 
         $this->router->get('/resource', fn () => $testResource::make($this->testModel));
 
@@ -228,7 +228,7 @@ class ProcessesAbilitiesTest extends TestCase
         };
 
         $this->testModel
-            ->addAbility('restore');
+            ->checkAbility('restore');
 
         $this->router->get('/resource', fn () => $testResource::make($this->testModel));
 
@@ -256,7 +256,7 @@ class ProcessesAbilitiesTest extends TestCase
         };
 
         $this->testModel
-            ->addAbility('view');
+            ->checkAbility('view');
 
         $this->router->get('/resource', fn () => $testResource::make($this->testModel));
 
@@ -287,7 +287,7 @@ class ProcessesAbilitiesTest extends TestCase
         };
 
         $this->testModel
-            ->addAbility('view');
+            ->checkAbility('view');
 
         $this->router->get('/resource', fn () => $testResource::make($this->testModel));
 
@@ -386,8 +386,8 @@ class ProcessesAbilitiesTest extends TestCase
 
         $collection = TestModel::query()->get();
         $collection
-            ->addAbility('viewAny')
-            ->addAbility('create');
+            ->checkAbility('viewAny')
+            ->checkAbility('create');
 
         $this->router->get('/resources', fn () => $testResource::collection($collection));
 
@@ -420,7 +420,7 @@ class ProcessesAbilitiesTest extends TestCase
         };
 
         $collection = TestModel::query()->get();
-        $collection->addAbility('viewAny');
+        $collection->checkAbility('viewAny');
 
         $this->router->get('/resources', fn () => $testResource::collection($collection));
 
