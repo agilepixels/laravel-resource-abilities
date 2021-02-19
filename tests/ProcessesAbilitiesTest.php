@@ -304,6 +304,35 @@ class ProcessesAbilitiesTest extends TestCase
         ]);
     }
 
+    /** @test */
+    public function it_will_use_serializer_per_ability_type_when_making_a_resource()
+    {
+        $testResource = new class(null) extends JsonResource {
+            use ProcessesAbilities;
+
+            public function toArray($request)
+            {
+                return [
+                    'abilities' => $this->abilities('view')->add('update', serializer: ExtendedAbilitySerializer::class),
+                ];
+            }
+        };
+
+        $this->router->get('/resource', fn () => $testResource::make($this->testModel));
+
+        $this->get('/resource')->assertExactJson([
+            'data' => [
+                'abilities' => [
+                    'view' => true,
+                    'update' => [
+                        'ability' => 'update',
+                        'granted' => false,
+                    ],
+                ],
+            ],
+        ]);
+    }
+
     /**
      * Collection
      */
