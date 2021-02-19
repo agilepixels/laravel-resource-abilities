@@ -8,7 +8,6 @@ use AgilePixels\ResourceAbilities\Tests\Fakes\TestModel;
 use AgilePixels\ResourceAbilities\Tests\Fakes\TestPolicy;
 use AgilePixels\ResourceAbilities\Tests\Fakes\User;
 use AgilePixels\ResourceAbilities\Tests\TestCase;
-use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 use Illuminate\Support\Facades\Auth;
@@ -54,7 +53,7 @@ class ProcessesAbilitiesTest extends TestCase
             {
                 return [
                     'data' => $this->collection,
-                    'abilities' => $this->abilities(TestPolicy::class, TestModel::class)
+                    'abilities' => $this->abilities(TestPolicy::class, TestModel::class),
                 ];
             }
         });
@@ -83,7 +82,7 @@ class ProcessesAbilitiesTest extends TestCase
             {
                 return [
                     'data' => $this->collection,
-                    'abilities' => $this->abilities(TestPolicy::class, TestModel::class)
+                    'abilities' => $this->abilities(TestPolicy::class, TestModel::class),
                 ];
             }
         });
@@ -109,7 +108,7 @@ class ProcessesAbilitiesTest extends TestCase
             {
                 return [
                     'data' => $this->collection,
-                    'abilities' => $this->abilities('viewAny', TestModel::class)
+                    'abilities' => $this->abilities('viewAny', TestModel::class),
                 ];
             }
         });
@@ -134,7 +133,7 @@ class ProcessesAbilitiesTest extends TestCase
             {
                 return [
                     'data' => $this->collection,
-                    'abilities' => $this->abilities('viewAny', TestModel::class)->add('create')
+                    'abilities' => $this->abilities('viewAny', TestModel::class)->add('create'),
                 ];
             }
         });
@@ -160,7 +159,7 @@ class ProcessesAbilitiesTest extends TestCase
             {
                 return [
                     'data' => $this->collection,
-                    'abilities' => $this->abilities(TestPolicy::class, TestModel::class)
+                    'abilities' => $this->abilities(TestPolicy::class, TestModel::class),
                 ];
             }
         });
@@ -186,7 +185,7 @@ class ProcessesAbilitiesTest extends TestCase
             {
                 return [
                     'data' => $this->collection,
-                    'abilities' => $this->abilities('create', TestModel::class, [true])
+                    'abilities' => $this->abilities('create', TestModel::class, [true]),
                 ];
             }
         });
@@ -211,7 +210,7 @@ class ProcessesAbilitiesTest extends TestCase
             {
                 return [
                     'data' => $this->collection,
-                    'abilities' => $this->abilities(TestPolicy::class, TestModel::class, [true])
+                    'abilities' => $this->abilities(TestPolicy::class, TestModel::class, [true]),
                 ];
             }
         });
@@ -237,7 +236,7 @@ class ProcessesAbilitiesTest extends TestCase
             {
                 return [
                     'data' => $this->collection,
-                    'abilities' => $this->abilities(TestPolicy::class, TestModel::class, serializer: ExtendedAbilitySerializer::class)
+                    'abilities' => $this->abilities(TestPolicy::class, TestModel::class, serializer: ExtendedAbilitySerializer::class),
                 ];
             }
         });
