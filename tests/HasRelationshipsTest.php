@@ -3,7 +3,7 @@
 namespace AgilePixels\ResourceAbilities\Tests;
 
 use AgilePixels\ResourceAbilities\HasRelationships;
-use AgilePixels\ResourceAbilities\ProcessesAbilities;
+use AgilePixels\ResourceAbilities\JsonResource\ProcessesAbilities;
 use AgilePixels\ResourceAbilities\Tests\Fakes\TestModel;
 use AgilePixels\ResourceAbilities\Tests\Fakes\User;
 use AgilePixels\ResourceAbilities\Tests\Fakes\UserResource;

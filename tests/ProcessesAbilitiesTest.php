@@ -2,7 +2,7 @@
 
 namespace AgilePixels\ResourceAbilities\Tests;
 
-use AgilePixels\ResourceAbilities\ProcessesAbilities;
+use AgilePixels\ResourceAbilities\JsonResource\ProcessesAbilities;
 use AgilePixels\ResourceAbilities\Serializers\ExtendedAbilitySerializer;
 use AgilePixels\ResourceAbilities\Tests\Fakes\TestModel;
 use AgilePixels\ResourceAbilities\Tests\Fakes\TestPolicy;

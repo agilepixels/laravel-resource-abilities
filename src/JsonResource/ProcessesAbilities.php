@@ -1,7 +1,9 @@
 <?php
 
-namespace AgilePixels\ResourceAbilities;
+namespace AgilePixels\ResourceAbilities\JsonResource;
 
+use AgilePixels\ResourceAbilities\AbilityResource;
+use AgilePixels\ResourceAbilities\Collection;
 use AgilePixels\ResourceAbilities\HasAbilities as ModelHasAbilities;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Resources\MissingValue;

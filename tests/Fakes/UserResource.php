@@ -3,7 +3,7 @@
 namespace AgilePixels\ResourceAbilities\Tests\Fakes;
 
 use AgilePixels\ResourceAbilities\HasRelationships;
-use AgilePixels\ResourceAbilities\ProcessesAbilities;
+use AgilePixels\ResourceAbilities\JsonResource\ProcessesAbilities;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class UserResource extends JsonResource
