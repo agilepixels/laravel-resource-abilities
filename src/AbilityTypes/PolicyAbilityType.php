@@ -7,9 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Gate;
 use JetBrains\PhpStorm\Pure;
-use ReflectionException;
 use ReflectionMethod;
-use ReflectionParameter;
 
 class PolicyAbilityType extends AbilityType
 {
@@ -55,7 +53,8 @@ class PolicyAbilityType extends AbilityType
             /**
              * Authorize all abilities that are left against $this->model
              */
-            ->map(fn ($ability) => is_string($this->model) || $this->requiresModelInstance($this->policy, $ability)
+            ->map(
+                fn ($ability) => is_string($this->model) || $this->requiresModelInstance($this->policy, $ability)
                 ? AbilityContainer::make($ability, Gate::check($ability, [$this->model, ...$this->parameters]))
                 : AbilityContainer::make($ability, Gate::check($ability, [$this->model::class, ...$this->parameters]))
             )
