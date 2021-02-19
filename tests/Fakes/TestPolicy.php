@@ -3,7 +3,6 @@
 namespace AgilePixels\ResourceAbilities\Tests\Fakes;
 
 use Illuminate\Auth\Access\HandlesAuthorization;
-use Illuminate\Database\Eloquent\Model;
 
 class TestPolicy
 {
