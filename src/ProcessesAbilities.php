@@ -17,7 +17,7 @@ trait ProcessesAbilities
             $this->resource,
             $this->resource->getAbilities(),
             $this->resource->getWithAllAbilities()
-        )->ability($ability, $parameters, $serializer);
+        )->add($ability, $parameters, $serializer);
     }
 
     public static function collectionAbilities(Collection | MissingValue $resource, string $ability, string $model, array $parameters = [], string $serializer = null): AbilityResource
@@ -26,6 +26,6 @@ trait ProcessesAbilities
             $model,
             $resource instanceof Collection ? $resource->getAbilities() : [],
             $resource instanceof Collection ? $resource->getWithAllAbilities() : true,
-        )->ability($ability, $parameters, $serializer);
+        )->add($ability, $parameters, $serializer);
     }
 }

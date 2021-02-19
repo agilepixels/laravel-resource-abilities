@@ -30,7 +30,7 @@ class AbilityResource extends JsonResource
         return new static($model, $abilities, $withAllAbilities);
     }
 
-    public function ability(string $ability, array $parameters = [], string $serializer = null): AbilityResource
+    public function add(string $ability, array $parameters = [], string $serializer = null): AbilityResource
     {
         /**
          * Handle Policy check
