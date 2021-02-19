@@ -386,9 +386,6 @@ class ProcessesAbilitiesTest extends TestCase
         };
 
         $collection = TestModel::query()->get();
-        $collection
-            ->checkAbility('viewAny')
-            ->checkAbility('create');
 
         $this->router->get('/resources', fn () => $testResource::collection($collection));
 
@@ -421,7 +418,6 @@ class ProcessesAbilitiesTest extends TestCase
         };
 
         $collection = TestModel::query()->get();
-        $collection->checkAbility('viewAny');
 
         $this->router->get('/resources', fn () => $testResource::collection($collection));
 
