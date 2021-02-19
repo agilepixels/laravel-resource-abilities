@@ -4,6 +4,7 @@ namespace AgilePixels\ResourceAbilities\Tests;
 
 use AgilePixels\ResourceAbilities\ProcessesAbilities;
 use AgilePixels\ResourceAbilities\Serializers\ExtendedAbilitySerializer;
+use AgilePixels\ResourceAbilities\Tests\Fakes\TestExtraPolicy;
 use AgilePixels\ResourceAbilities\Tests\Fakes\TestModel;
 use AgilePixels\ResourceAbilities\Tests\Fakes\TestPolicy;
 use AgilePixels\ResourceAbilities\Tests\Fakes\User;
@@ -35,6 +36,10 @@ class ProcessesAbilitiesTest extends TestCase
 
         Auth::login($this->user);
     }
+
+    /**
+     * Resource
+     */
 
     /** @test */
     public function it_will_generate_abilities_when_making_a_resource()
@@ -113,6 +118,38 @@ class ProcessesAbilitiesTest extends TestCase
             'data' => [
                 'abilities' => [
                     'view' => true,
+                ],
+            ],
+        ]);
+    }
+
+    /** @test */
+    public function it_will_check_multiple_gate_abilities_when_making_a_resource()
+    {
+        $testResource = new class(null) extends JsonResource {
+            use ProcessesAbilities;
+
+            public function toArray($request)
+            {
+                return [
+                    'abilities' => $this
+                        ->abilities('view')
+                        ->add('update'),
+                ];
+            }
+        };
+
+        $this->testModel
+            ->addAbility('view')
+            ->addAbility('update');
+
+        $this->router->get('/resource', fn () => $testResource::make($this->testModel));
+
+        $this->get('/resource')->assertExactJson([
+            'data' => [
+                'abilities' => [
+                    'view' => true,
+                    'update' => false,
                 ],
             ],
         ]);
@@ -363,6 +400,38 @@ class ProcessesAbilitiesTest extends TestCase
             'data' => [[]],
             'abilities' => [
                 'viewAny' => true,
+            ],
+        ]);
+    }
+
+    /** @test */
+    public function it_will_check_multiple_gate_abilities_when_making_a_collection()
+    {
+        $testResource = new class(null) extends JsonResource {
+            use ProcessesAbilities;
+
+            public function toArray($request)
+            {
+                return [];
+            }
+
+            public static function collection($resource): AnonymousResourceCollection
+            {
+                return parent::collection($resource)->additional([
+                    'abilities' => self::collectionAbilities($resource, 'viewAny', TestModel::class)->add('create'),
+                ]);
+            }
+        };
+
+        $collection = TestModel::query()->get();
+
+        $this->router->get('/resources', fn () => $testResource::collection($collection));
+
+        $this->get('/resources')->assertExactJson([
+            'data' => [[]],
+            'abilities' => [
+                'viewAny' => true,
+                'create' => false,
             ],
         ]);
     }
