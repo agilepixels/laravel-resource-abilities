@@ -3,6 +3,7 @@
 namespace AgilePixels\ResourceAbilities\Tests\Fakes;
 
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Database\Eloquent\Model;
 
 class TestPolicy
 {
@@ -26,9 +27,9 @@ class TestPolicy
         return true;
     }
 
-    public function create(User $user): bool
+    public function create(User $user, bool $parameter = false): bool
     {
-        return false;
+        return $parameter;
     }
 
     public function update(User $user, TestModel $test): bool

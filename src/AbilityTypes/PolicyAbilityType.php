@@ -7,7 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Gate;
 use JetBrains\PhpStorm\Pure;
+use ReflectionException;
 use ReflectionMethod;
+use ReflectionParameter;
 
 class PolicyAbilityType extends AbilityType
 {
@@ -39,8 +41,7 @@ class PolicyAbilityType extends AbilityType
              */
             ->when(
                 ! $withAllAbilities,
-                fn (Collection $collection) =>
-                $collection->filter(fn (string $ability) => in_array($ability, $abilities))
+                fn (Collection $collection) => $collection->filter(fn (string $ability) => in_array($ability, $abilities))
             )
 
             /**
@@ -48,25 +49,31 @@ class PolicyAbilityType extends AbilityType
              */
             ->when(
                 ! $this->model instanceof Model,
-                fn (Collection $collection) =>
-                $collection->filter(
-                    fn (string $ability) => count($parameters = (new ReflectionMethod($this->policy, $ability))->getParameters()) > 1
-                    ? $parameters[1]->getType()?->getName() !== $this->model
-                    : true
-                )
+                fn (Collection $collection) => $collection->filter(fn (string $ability) => ! $this->requiresModelInstance($this->policy, $ability))
             )
+
             /**
              * Authorize all abilities that are left against $this->model
              */
-            ->map(fn ($ability) => AbilityContainer::make(
-                $ability,
-                Gate::check($ability, [$this->model, ...$this->parameters]),
-            ))
+            ->map(fn ($ability) => is_string($this->model) || $this->requiresModelInstance($this->policy, $ability)
+                ? AbilityContainer::make($ability, Gate::check($ability, [$this->model, ...$this->parameters]))
+                : AbilityContainer::make($ability, Gate::check($ability, [$this->model::class, ...$this->parameters]))
+            )
 
             /**
              * Format the resulting set of abilities using the given serializer
              */
             ->flatMap(fn ($abilityContainer) => $this->resolveSerializer()->format($abilityContainer))
             ->toArray();
+    }
+
+    protected function getParameters(string $policy, string $ability): Collection
+    {
+        return collect((new ReflectionMethod($policy, $ability))->getParameters());
+    }
+
+    protected function requiresModelInstance(string $policy, string $ability): bool
+    {
+        return $this->getParameters($policy, $ability)->skip(1)->first()?->getType()?->getName() === (is_string($this->model) ? $this->model : $this->model::class);
     }
 }

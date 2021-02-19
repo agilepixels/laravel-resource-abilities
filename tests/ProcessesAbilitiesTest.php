@@ -139,7 +139,7 @@ class ProcessesAbilitiesTest extends TestCase
                 'abilities' => [
                     'viewAny' => true,
                     'view' => true,
-                    'create' => false,
+                    'create' => true,
                     'update' => false,
                     'delete' => true,
                     'restore' => true,
@@ -267,6 +267,10 @@ class ProcessesAbilitiesTest extends TestCase
         ]);
     }
 
+    /**
+     * Collection
+     */
+
     /** @test */
     public function it_will_generate_abilities_when_making_a_collection()
     {
@@ -391,6 +395,69 @@ class ProcessesAbilitiesTest extends TestCase
             'abilities' => [
                 'viewAny' => true,
                 'create' => false,
+            ],
+        ]);
+    }
+
+    /** @test */
+    public function it_will_pass_parameters_when_checking_gates_when_making_a_collection()
+    {
+        $testResource = new class(null) extends JsonResource {
+            use ProcessesAbilities;
+
+            public function toArray($request)
+            {
+                return [];
+            }
+
+            public static function collection($resource): AnonymousResourceCollection
+            {
+                return parent::collection($resource)->additional([
+                    'abilities' => self::collectionAbilities($resource, 'create', TestModel::class, [true]),
+                ]);
+            }
+        };
+
+        $collection = TestModel::query()->get();
+
+        $this->router->get('/resources', fn () => $testResource::collection($collection));
+
+        $this->get('/resources')->assertExactJson([
+            'data' => [[]],
+            'abilities' => [
+                'create' => true,
+            ],
+        ]);
+    }
+
+    /** @test */
+    public function it_will_pass_parameters_when_checking_policies_when_making_a_collection()
+    {
+        $testResource = new class(null) extends JsonResource {
+            use ProcessesAbilities;
+
+            public function toArray($request)
+            {
+                return [];
+            }
+
+            public static function collection($resource): AnonymousResourceCollection
+            {
+                return parent::collection($resource)->additional([
+                    'abilities' => self::collectionAbilities($resource, TestPolicy::class, TestModel::class, [true]),
+                ]);
+            }
+        };
+
+        $collection = TestModel::query()->get();
+
+        $this->router->get('/resources', fn () => $testResource::collection($collection));
+
+        $this->get('/resources')->assertExactJson([
+            'data' => [[]],
+            'abilities' => [
+                'viewAny' => true,
+                'create' => true,
             ],
         ]);
     }
