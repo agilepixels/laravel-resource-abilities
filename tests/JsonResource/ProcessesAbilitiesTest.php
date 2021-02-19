@@ -1,12 +1,13 @@
 <?php
 
-namespace AgilePixels\ResourceAbilities\Tests;
+namespace AgilePixels\ResourceAbilities\Tests\JsonResource;
 
 use AgilePixels\ResourceAbilities\JsonResource\ProcessesAbilities;
 use AgilePixels\ResourceAbilities\Serializers\ExtendedAbilitySerializer;
 use AgilePixels\ResourceAbilities\Tests\Fakes\TestModel;
 use AgilePixels\ResourceAbilities\Tests\Fakes\TestPolicy;
 use AgilePixels\ResourceAbilities\Tests\Fakes\User;
+use AgilePixels\ResourceAbilities\Tests\TestCase;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Auth;
