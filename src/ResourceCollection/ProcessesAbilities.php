@@ -40,7 +40,9 @@ trait ProcessesAbilities
         $collects = $this->collects();
 
         $this->collection = $collects && ! $resource->first() instanceof $collects
-            ? $resource->mapInto($collects)
+            ? $resource
+                ->mapInto($collects)
+                ->mergeAbilities($this->resource->getAbilities(), $this->resource->getWithAllAbilities())
             : $resource->toBase();
 
         return $resource instanceof AbstractPaginator
