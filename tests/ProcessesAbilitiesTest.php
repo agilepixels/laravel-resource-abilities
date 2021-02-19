@@ -461,4 +461,76 @@ class ProcessesAbilitiesTest extends TestCase
             ],
         ]);
     }
+
+    /** @test */
+    public function it_will_use_serializer_when_checking_policies_when_making_a_collection()
+    {
+        $testResource = new class(null) extends JsonResource {
+            use ProcessesAbilities;
+
+            public function toArray($request)
+            {
+                return [];
+            }
+
+            public static function collection($resource): AnonymousResourceCollection
+            {
+                return parent::collection($resource)->additional([
+                    'abilities' => self::collectionAbilities($resource, TestPolicy::class, TestModel::class, serializer: ExtendedAbilitySerializer::class),
+                ]);
+            }
+        };
+
+        $collection = TestModel::query()->get();
+
+        $this->router->get('/resources', fn () => $testResource::collection($collection));
+
+        $this->get('/resources')->assertExactJson([
+            'data' => [[]],
+            'abilities' => [
+                'viewAny' => [
+                    'ability' => 'viewAny',
+                    'granted' => true,
+                ],
+                'create' => [
+                    'ability' => 'create',
+                    'granted' => false,
+                ],
+            ],
+        ]);
+    }
+
+    /** @test */
+    public function it_will_use_serializer_when_checking_gates_when_making_a_collection()
+    {
+        $testResource = new class(null) extends JsonResource {
+            use ProcessesAbilities;
+
+            public function toArray($request)
+            {
+                return [];
+            }
+
+            public static function collection($resource): AnonymousResourceCollection
+            {
+                return parent::collection($resource)->additional([
+                    'abilities' => self::collectionAbilities($resource, 'viewAny', TestModel::class, serializer: ExtendedAbilitySerializer::class),
+                ]);
+            }
+        };
+
+        $collection = TestModel::query()->get();
+
+        $this->router->get('/resources', fn () => $testResource::collection($collection));
+
+        $this->get('/resources')->assertExactJson([
+            'data' => [[]],
+            'abilities' => [
+                'viewAny' => [
+                    'ability' => 'viewAny',
+                    'granted' => true,
+                ],
+            ],
+        ]);
+    }
 }
