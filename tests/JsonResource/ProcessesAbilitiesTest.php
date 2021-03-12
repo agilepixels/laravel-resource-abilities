@@ -65,8 +65,8 @@ class ProcessesAbilitiesTest extends TestCase
                 'users' => [
                     'data' => [
                         ['id' => 1, 'name' => 'Test User'],
-                    ]
-                ]
+                    ],
+                ],
             ],
         ]);
     }
@@ -387,7 +387,7 @@ class ProcessesAbilitiesTest extends TestCase
 
         $this->get('/resources')->assertExactJson([
             'data' => [
-                ['id' => 1]
+                ['id' => 1],
             ],
         ]);
     }
@@ -417,9 +417,9 @@ class ProcessesAbilitiesTest extends TestCase
                     'users' => [
                         'data' => [
                             ['id' => 1, 'name' => 'Test User'],
-                        ]
-                    ]
-                ]
+                        ],
+                    ],
+                ],
             ],
         ]);
     }

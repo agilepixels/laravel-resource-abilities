@@ -3,9 +3,9 @@
 namespace AgilePixels\ResourceAbilities\JsonResource;
 
 use AgilePixels\ResourceAbilities\AbilityResource;
+use AgilePixels\ResourceAbilities\AnonymousResourceCollection;
 use AgilePixels\ResourceAbilities\Collection;
 use AgilePixels\ResourceAbilities\HasAbilities as ModelHasAbilities;
-use AgilePixels\ResourceAbilities\AnonymousResourceCollection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Resources\MissingValue;
 

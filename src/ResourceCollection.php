@@ -6,9 +6,9 @@ use Illuminate\Container\Container;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\ResourceCollection as BaseResourceCollection;
 use Illuminate\Pagination\AbstractPaginator;
 use Illuminate\Support\Collection;
-use Illuminate\Http\Resources\Json\ResourceCollection as BaseResourceCollection;
 use JsonSerializable;
 
 class ResourceCollection extends BaseResourceCollection

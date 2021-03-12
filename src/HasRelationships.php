@@ -2,7 +2,6 @@
 
 namespace AgilePixels\ResourceAbilities;
 
-use AgilePixels\ResourceAbilities\ResourceCollection;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 trait HasRelationships
