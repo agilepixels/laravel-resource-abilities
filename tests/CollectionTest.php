@@ -2,7 +2,6 @@
 
 namespace AgilePixels\ResourceAbilities\Tests;
 
-use AgilePixels\ResourceAbilities\AddsAbilitiesTest;
 use AgilePixels\ResourceAbilities\Tests\Fakes\TestModel;
 
 class CollectionTest extends TestCase

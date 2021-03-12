@@ -1,6 +1,6 @@
 <?php
 
-namespace AgilePixels\ResourceAbilities;
+namespace AgilePixels\ResourceAbilities\Tests;
 
 trait AddsAbilitiesTest
 {
