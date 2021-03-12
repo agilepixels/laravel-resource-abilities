@@ -5,6 +5,7 @@ namespace AgilePixels\ResourceAbilities\JsonResource;
 use AgilePixels\ResourceAbilities\AbilityResource;
 use AgilePixels\ResourceAbilities\Collection;
 use AgilePixels\ResourceAbilities\HasAbilities as ModelHasAbilities;
+use AgilePixels\ResourceAbilities\AnonymousResourceCollection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Resources\MissingValue;
 
@@ -29,5 +30,20 @@ trait ProcessesAbilities
             $resource instanceof Collection ? $resource->getAbilities() : [],
             $resource instanceof Collection ? $resource->getWithAllAbilities() : true,
         )->add($ability, $parameters, $serializer);
+    }
+
+    /**
+     * Create a new anonymous resource collection.
+     *
+     * @param  mixed  $resource
+     * @return AnonymousResourceCollection
+     */
+    public static function collection($resource): AnonymousResourceCollection
+    {
+        return tap(new AnonymousResourceCollection($resource, static::class), function ($collection) {
+            if (property_exists(static::class, 'preserveKeys')) {
+                $collection->preserveKeys = (new static([]))->preserveKeys === true;
+            }
+        });
     }
 }

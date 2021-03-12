@@ -2,12 +2,12 @@
 
 namespace AgilePixels\ResourceAbilities;
 
-use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use AgilePixels\ResourceAbilities\ResourceCollection;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 trait HasRelationships
 {
-    public static function collectionWhenLoaded(string $relationship, JsonResource $jsonResource): AnonymousResourceCollection
+    public static function collectionWhenLoaded(string $relationship, JsonResource $jsonResource): ResourceCollection
     {
         return static::collection($jsonResource->whenLoaded($relationship));
     }

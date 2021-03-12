@@ -3,13 +3,13 @@
 namespace AgilePixels\ResourceAbilities\Tests\ResourceCollection;
 
 use AgilePixels\ResourceAbilities\ResourceCollection\ProcessesAbilities;
+use AgilePixels\ResourceAbilities\ResourceCollection;
 use AgilePixels\ResourceAbilities\Serializers\ExtendedAbilitySerializer;
 use AgilePixels\ResourceAbilities\Tests\Fakes\TestModel;
 use AgilePixels\ResourceAbilities\Tests\Fakes\TestPolicy;
 use AgilePixels\ResourceAbilities\Tests\Fakes\User;
 use AgilePixels\ResourceAbilities\Tests\TestCase;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Http\Resources\Json\ResourceCollection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 

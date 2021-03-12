@@ -123,9 +123,11 @@ class HasRelationshipsTest extends TestCase
         $this->get('/resource')->assertExactJson([
             'data' => [
                 'users' => [
-                    [
-                        'id' => 1,
-                        'name' => 'Test User',
+                    'data' => [
+                        [
+                            'id' => 1,
+                            'name' => 'Test User',
+                        ],
                     ],
                 ],
             ],

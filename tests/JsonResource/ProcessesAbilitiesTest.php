@@ -7,6 +7,7 @@ use AgilePixels\ResourceAbilities\Serializers\ExtendedAbilitySerializer;
 use AgilePixels\ResourceAbilities\Tests\Fakes\TestModel;
 use AgilePixels\ResourceAbilities\Tests\Fakes\TestPolicy;
 use AgilePixels\ResourceAbilities\Tests\Fakes\User;
+use AgilePixels\ResourceAbilities\Tests\Fakes\UserResource;
 use AgilePixels\ResourceAbilities\Tests\TestCase;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -40,6 +41,35 @@ class ProcessesAbilitiesTest extends TestCase
     /**
      * Resource
      */
+
+    /** @test */
+    public function it_will_wrap_nested_resources_when_making_a_resource()
+    {
+        $testResource = new class(null) extends JsonResource {
+            use ProcessesAbilities;
+
+            public function toArray($request)
+            {
+                return [
+                    'users' => UserResource::collectionWhenLoaded('users', $this),
+                ];
+            }
+        };
+
+        $this->testModel->setRelation('users', [$this->user]);
+
+        $this->router->get('/resource', fn () => $testResource::make($this->testModel->withAllAbilities(false)));
+
+        $this->get('/resource')->assertExactJson([
+            'data' => [
+                'users' => [
+                    'data' => [
+                        ['id' => 1, 'name' => 'Test User'],
+                    ]
+                ]
+            ],
+        ]);
+    }
 
     /** @test */
     public function it_will_generate_abilities_when_making_a_resource()
@@ -336,6 +366,63 @@ class ProcessesAbilitiesTest extends TestCase
     /**
      * Collection
      */
+
+    /** @test */
+    public function it_will_wrap_data_when_making_a_collection()
+    {
+        $testResource = new class(null) extends JsonResource {
+            use ProcessesAbilities;
+
+            public function toArray($request)
+            {
+                return [
+                    'id' => $this->id,
+                ];
+            }
+        };
+
+        $collection = TestModel::query()->get();
+
+        $this->router->get('/resources', fn () => $testResource::collection($collection->withAllAbilities(false)));
+
+        $this->get('/resources')->assertExactJson([
+            'data' => [
+                ['id' => 1]
+            ],
+        ]);
+    }
+
+    /** @test */
+    public function it_will_wrap_nested_resources_when_making_a_collection()
+    {
+        $testResource = new class(null) extends JsonResource {
+            use ProcessesAbilities;
+
+            public function toArray($request)
+            {
+                return [
+                    'users' => UserResource::collectionWhenLoaded('users', $this),
+                ];
+            }
+        };
+
+        $collection = TestModel::query()->get();
+        $collection->map(fn (TestModel $testModel) => $testModel->setRelation('users', [$this->user]));
+
+        $this->router->get('/resources', fn () => $testResource::collection($collection->withAllAbilities(false)));
+
+        $this->get('/resources')->assertExactJson([
+            'data' => [
+                [
+                    'users' => [
+                        'data' => [
+                            ['id' => 1, 'name' => 'Test User'],
+                        ]
+                    ]
+                ]
+            ],
+        ]);
+    }
 
     /** @test */
     public function it_will_generate_abilities_when_making_a_collection()
