@@ -26,9 +26,7 @@ abstract class AbilityType
      */
     public function parameters(array $parameters): self
     {
-        foreach ($parameters as $parameter) {
-            $this->parameters = array_merge($this->parameters, Arr::wrap($parameter));
-        }
+        $this->parameters = array_map(static fn($parameter) => Arr::wrap($parameter), $parameters);
 
         return $this;
     }
