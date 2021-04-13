@@ -26,7 +26,7 @@ abstract class AbilityType
      */
     public function parameters(array $parameters): self
     {
-        $this->parameters = array_map(static fn($parameter) => Arr::wrap($parameter), $parameters);
+        $this->parameters = $parameters;
 
         return $this;
     }
