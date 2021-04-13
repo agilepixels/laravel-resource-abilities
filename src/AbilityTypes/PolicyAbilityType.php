@@ -39,7 +39,7 @@ class PolicyAbilityType extends AbilityType
              */
             ->when(
                 ! $withAllAbilities,
-                fn (Collection $collection) => $collection->filter(fn (string $ability) => in_array($ability, $abilities))
+                fn (Collection $collection) => $collection->filter(fn (string $ability) => in_array($ability, $abilities, true))
             )
 
             /**
