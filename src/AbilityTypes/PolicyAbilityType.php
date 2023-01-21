@@ -35,6 +35,11 @@ class PolicyAbilityType extends AbilityType
         return collect($this->abilities)
 
             /**
+             * Filter out helper methods
+             */
+            ->reject(fn (string $ability) => in_array($ability, ['denyWithStatus', 'denyAsNotFound']))
+
+            /**
              * Filter out the non-specified abilities
              */
             ->when(
