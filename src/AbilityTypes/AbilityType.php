@@ -4,7 +4,6 @@ namespace AgilePixels\ResourceAbilities\AbilityTypes;
 
 use AgilePixels\ResourceAbilities\Serializers\Serializer;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Arr;
 
 abstract class AbilityType
 {
@@ -52,7 +51,7 @@ abstract class AbilityType
             ? config('resource-abilities.serializer')
             : $this->serializer;
 
-        return new $serializer;
+        return new $serializer();
     }
 
     /**

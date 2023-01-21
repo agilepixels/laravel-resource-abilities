@@ -35,8 +35,9 @@ class HasRelationshipsTest extends TestCase
     /** @test */
     public function it_will_drop_a_to_one_relation_when_not_loaded()
     {
-        $testResource = new class(null) extends JsonResource {
-            use ProcessesAbilities, HasRelationships;
+        $testResource = new class (null) extends JsonResource {
+            use ProcessesAbilities;
+            use HasRelationships;
 
             public function toArray($request)
             {
@@ -56,8 +57,9 @@ class HasRelationshipsTest extends TestCase
     /** @test */
     public function it_will_add_a_to_one_relation_when_loaded()
     {
-        $testResource = new class(null) extends JsonResource {
-            use ProcessesAbilities, HasRelationships;
+        $testResource = new class (null) extends JsonResource {
+            use ProcessesAbilities;
+            use HasRelationships;
 
             public function toArray($request)
             {
@@ -84,8 +86,9 @@ class HasRelationshipsTest extends TestCase
     /** @test */
     public function it_will_drop_a_to_many_relation_when_not_loaded()
     {
-        $testResource = new class(null) extends JsonResource {
-            use ProcessesAbilities, HasRelationships;
+        $testResource = new class (null) extends JsonResource {
+            use ProcessesAbilities;
+            use HasRelationships;
 
             public function toArray($request)
             {
@@ -105,8 +108,9 @@ class HasRelationshipsTest extends TestCase
     /** @test */
     public function it_will_add_a_to_many_relation_when_loaded()
     {
-        $testResource = new class(null) extends JsonResource {
-            use ProcessesAbilities, HasRelationships;
+        $testResource = new class (null) extends JsonResource {
+            use ProcessesAbilities;
+            use HasRelationships;
 
             public function toArray($request)
             {

@@ -8,7 +8,8 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class UserResource extends JsonResource
 {
-    use ProcessesAbilities, HasRelationships;
+    use ProcessesAbilities;
+    use HasRelationships;
 
     public function toArray($request): array
     {

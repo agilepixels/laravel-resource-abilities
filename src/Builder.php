@@ -1,6 +1,5 @@
 <?php
 
-
 namespace AgilePixels\ResourceAbilities;
 
 use Illuminate\Database\Eloquent\Builder as BaseBuilder;
