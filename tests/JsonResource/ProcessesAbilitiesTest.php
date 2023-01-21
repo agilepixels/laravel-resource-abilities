@@ -45,7 +45,7 @@ class ProcessesAbilitiesTest extends TestCase
     /** @test */
     public function it_will_wrap_nested_resources_when_making_a_resource()
     {
-        $testResource = new class(null) extends JsonResource {
+        $testResource = new class (null) extends JsonResource {
             use ProcessesAbilities;
 
             public function toArray($request)
@@ -74,7 +74,7 @@ class ProcessesAbilitiesTest extends TestCase
     /** @test */
     public function it_will_generate_abilities_when_making_a_resource()
     {
-        $testResource = new class(null) extends JsonResource {
+        $testResource = new class (null) extends JsonResource {
             use ProcessesAbilities;
 
             public function toArray($request)
@@ -97,7 +97,7 @@ class ProcessesAbilitiesTest extends TestCase
     /** @test */
     public function it_will_check_policy_abilities_when_making_a_resource()
     {
-        $testResource = new class(null) extends JsonResource {
+        $testResource = new class (null) extends JsonResource {
             use ProcessesAbilities;
 
             public function toArray($request)
@@ -127,7 +127,7 @@ class ProcessesAbilitiesTest extends TestCase
     /** @test */
     public function it_will_check_gate_abilities_when_making_a_resource()
     {
-        $testResource = new class(null) extends JsonResource {
+        $testResource = new class (null) extends JsonResource {
             use ProcessesAbilities;
 
             public function toArray($request)
@@ -156,7 +156,7 @@ class ProcessesAbilitiesTest extends TestCase
     /** @test */
     public function it_will_check_multiple_gate_abilities_when_making_a_resource()
     {
-        $testResource = new class(null) extends JsonResource {
+        $testResource = new class (null) extends JsonResource {
             use ProcessesAbilities;
 
             public function toArray($request)
@@ -188,7 +188,7 @@ class ProcessesAbilitiesTest extends TestCase
     /** @test */
     public function it_will_check_all_policy_abilities_when_making_a_resource()
     {
-        $testResource = new class(null) extends JsonResource {
+        $testResource = new class (null) extends JsonResource {
             use ProcessesAbilities;
 
             public function toArray($request)
@@ -219,7 +219,7 @@ class ProcessesAbilitiesTest extends TestCase
     /** @test */
     public function it_will_pass_parameters_when_checking_gates_when_making_a_resource()
     {
-        $testResource = new class(null) extends JsonResource {
+        $testResource = new class (null) extends JsonResource {
             use ProcessesAbilities;
 
             public function toArray($request)
@@ -247,7 +247,7 @@ class ProcessesAbilitiesTest extends TestCase
     /** @test */
     public function it_will_pass_parameters_when_checking_policies_when_making_a_resource()
     {
-        $testResource = new class(null) extends JsonResource {
+        $testResource = new class (null) extends JsonResource {
             use ProcessesAbilities;
 
             public function toArray($request)
@@ -275,7 +275,7 @@ class ProcessesAbilitiesTest extends TestCase
     /** @test */
     public function it_will_use_serializer_when_checking_policies_when_making_a_resource()
     {
-        $testResource = new class(null) extends JsonResource {
+        $testResource = new class (null) extends JsonResource {
             use ProcessesAbilities;
 
             public function toArray($request)
@@ -306,7 +306,7 @@ class ProcessesAbilitiesTest extends TestCase
     /** @test */
     public function it_will_use_serializer_when_checking_gates_when_making_a_resource()
     {
-        $testResource = new class(null) extends JsonResource {
+        $testResource = new class (null) extends JsonResource {
             use ProcessesAbilities;
 
             public function toArray($request)
@@ -337,7 +337,7 @@ class ProcessesAbilitiesTest extends TestCase
     /** @test */
     public function it_will_use_serializer_per_ability_type_when_making_a_resource()
     {
-        $testResource = new class(null) extends JsonResource {
+        $testResource = new class (null) extends JsonResource {
             use ProcessesAbilities;
 
             public function toArray($request)
@@ -370,7 +370,7 @@ class ProcessesAbilitiesTest extends TestCase
     /** @test */
     public function it_will_wrap_data_when_making_a_collection()
     {
-        $testResource = new class(null) extends JsonResource {
+        $testResource = new class (null) extends JsonResource {
             use ProcessesAbilities;
 
             public function toArray($request)
@@ -395,7 +395,7 @@ class ProcessesAbilitiesTest extends TestCase
     /** @test */
     public function it_will_wrap_nested_resources_when_making_a_collection()
     {
-        $testResource = new class(null) extends JsonResource {
+        $testResource = new class (null) extends JsonResource {
             use ProcessesAbilities;
 
             public function toArray($request)
@@ -427,7 +427,7 @@ class ProcessesAbilitiesTest extends TestCase
     /** @test */
     public function it_will_generate_abilities_when_making_a_collection()
     {
-        $testResource = new class(null) extends JsonResource {
+        $testResource = new class (null) extends JsonResource {
             use ProcessesAbilities;
 
             public function toArray($request)
@@ -456,7 +456,7 @@ class ProcessesAbilitiesTest extends TestCase
     /** @test */
     public function it_will_check_policy_abilities_when_making_a_collection()
     {
-        $testResource = new class(null) extends JsonResource {
+        $testResource = new class (null) extends JsonResource {
             use ProcessesAbilities;
 
             public function toArray($request)
@@ -488,7 +488,7 @@ class ProcessesAbilitiesTest extends TestCase
     /** @test */
     public function it_will_check_gate_abilities_when_making_a_collection()
     {
-        $testResource = new class(null) extends JsonResource {
+        $testResource = new class (null) extends JsonResource {
             use ProcessesAbilities;
 
             public function toArray($request)
@@ -519,7 +519,7 @@ class ProcessesAbilitiesTest extends TestCase
     /** @test */
     public function it_will_check_multiple_gate_abilities_when_making_a_collection()
     {
-        $testResource = new class(null) extends JsonResource {
+        $testResource = new class (null) extends JsonResource {
             use ProcessesAbilities;
 
             public function toArray($request)
@@ -551,7 +551,7 @@ class ProcessesAbilitiesTest extends TestCase
     /** @test */
     public function it_will_check_only_policy_abilities_without_models_when_making_a_collection()
     {
-        $testResource = new class(null) extends JsonResource {
+        $testResource = new class (null) extends JsonResource {
             use ProcessesAbilities;
 
             public function toArray($request)
@@ -583,7 +583,7 @@ class ProcessesAbilitiesTest extends TestCase
     /** @test */
     public function it_will_pass_parameters_when_checking_gates_when_making_a_collection()
     {
-        $testResource = new class(null) extends JsonResource {
+        $testResource = new class (null) extends JsonResource {
             use ProcessesAbilities;
 
             public function toArray($request)
@@ -614,7 +614,7 @@ class ProcessesAbilitiesTest extends TestCase
     /** @test */
     public function it_will_pass_parameters_when_checking_policies_when_making_a_collection()
     {
-        $testResource = new class(null) extends JsonResource {
+        $testResource = new class (null) extends JsonResource {
             use ProcessesAbilities;
 
             public function toArray($request)
@@ -646,7 +646,7 @@ class ProcessesAbilitiesTest extends TestCase
     /** @test */
     public function it_will_use_serializer_when_checking_policies_when_making_a_collection()
     {
-        $testResource = new class(null) extends JsonResource {
+        $testResource = new class (null) extends JsonResource {
             use ProcessesAbilities;
 
             public function toArray($request)
@@ -684,7 +684,7 @@ class ProcessesAbilitiesTest extends TestCase
     /** @test */
     public function it_will_use_serializer_when_checking_gates_when_making_a_collection()
     {
-        $testResource = new class(null) extends JsonResource {
+        $testResource = new class (null) extends JsonResource {
             use ProcessesAbilities;
 
             public function toArray($request)

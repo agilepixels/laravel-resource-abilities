@@ -25,7 +25,7 @@ class ProcessesAbilitiesTest extends TestCase
 
         Gate::policy(TestModel::class, TestPolicy::class);
 
-        $this->testResource = new class(null) extends JsonResource {
+        $this->testResource = new class (null) extends JsonResource {
             use ProcessesAbilities;
 
             public function toArray($request)
@@ -46,7 +46,7 @@ class ProcessesAbilitiesTest extends TestCase
     {
         $collection = TestModel::query()->get();
 
-        $this->router->get('/resources', fn () => new class($collection) extends ResourceCollection {
+        $this->router->get('/resources', fn () => new class ($collection) extends ResourceCollection {
             use ProcessesAbilities;
 
             public function toArray($request)
@@ -75,7 +75,7 @@ class ProcessesAbilitiesTest extends TestCase
             ->checkAbility('viewAny')
             ->checkAbility('create');
 
-        $this->router->get('/resources', fn () => new class($collection) extends ResourceCollection {
+        $this->router->get('/resources', fn () => new class ($collection) extends ResourceCollection {
             use ProcessesAbilities;
 
             public function toArray($request)
@@ -101,7 +101,7 @@ class ProcessesAbilitiesTest extends TestCase
     {
         $collection = TestModel::query()->get();
 
-        $this->router->get('/resources', fn () => new class($collection) extends ResourceCollection {
+        $this->router->get('/resources', fn () => new class ($collection) extends ResourceCollection {
             use ProcessesAbilities;
 
             public function toArray($request)
@@ -126,7 +126,7 @@ class ProcessesAbilitiesTest extends TestCase
     {
         $collection = TestModel::query()->get();
 
-        $this->router->get('/resources', fn () => new class($collection) extends ResourceCollection {
+        $this->router->get('/resources', fn () => new class ($collection) extends ResourceCollection {
             use ProcessesAbilities;
 
             public function toArray($request)
@@ -152,7 +152,7 @@ class ProcessesAbilitiesTest extends TestCase
     {
         $collection = TestModel::query()->get();
 
-        $this->router->get('/resources', fn () => new class($collection) extends ResourceCollection {
+        $this->router->get('/resources', fn () => new class ($collection) extends ResourceCollection {
             use ProcessesAbilities;
 
             public function toArray($request)
@@ -178,7 +178,7 @@ class ProcessesAbilitiesTest extends TestCase
     {
         $collection = TestModel::query()->get();
 
-        $this->router->get('/resources', fn () => new class($collection) extends ResourceCollection {
+        $this->router->get('/resources', fn () => new class ($collection) extends ResourceCollection {
             use ProcessesAbilities;
 
             public function toArray($request)
@@ -203,7 +203,7 @@ class ProcessesAbilitiesTest extends TestCase
     {
         $collection = TestModel::query()->get();
 
-        $this->router->get('/resources', fn () => new class($collection) extends ResourceCollection {
+        $this->router->get('/resources', fn () => new class ($collection) extends ResourceCollection {
             use ProcessesAbilities;
 
             public function toArray($request)
@@ -229,7 +229,7 @@ class ProcessesAbilitiesTest extends TestCase
     {
         $collection = TestModel::query()->get();
 
-        $this->router->get('/resources', fn () => new class($collection) extends ResourceCollection {
+        $this->router->get('/resources', fn () => new class ($collection) extends ResourceCollection {
             use ProcessesAbilities;
 
             public function toArray($request)
@@ -261,7 +261,7 @@ class ProcessesAbilitiesTest extends TestCase
     {
         $collection = TestModel::query()->get();
 
-        $this->router->get('/resources', fn () => new class($collection) extends ResourceCollection {
+        $this->router->get('/resources', fn () => new class ($collection) extends ResourceCollection {
             use ProcessesAbilities;
 
             public function toArray($request)

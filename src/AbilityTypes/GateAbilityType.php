@@ -23,7 +23,7 @@ class GateAbilityType extends AbilityType
 
     public function getAbilities(array $abilities, bool $withAllAbilities): array
     {
-        if (!in_array($this->ability, $abilities, true) && ! $withAllAbilities) {
+        if (! in_array($this->ability, $abilities, true) && ! $withAllAbilities) {
             return [];
         }
 
